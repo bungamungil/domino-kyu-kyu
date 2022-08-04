@@ -1,8 +1,27 @@
-class GameDomino(
-    val daftarPemain: List<Pemain>,
-    val tumpukkanKartuBuatNyangkul: TumpukkanKartu,
-    val tumpukkanKartuYangSudahKebuang: TumpukkanKartu
+open class GameDomino(
+    val daftarPemain: List<Pemain>
 ) {
+
+    val tumpukkanKartuBuatNyangkul: TumpukkanKartu
+    val tumpukkanKartuYangSudahKebuang: TumpukkanKartu
+
+    init {
+        val daftarKartu = generateKartuDomino();
+        println("Daftar Kartu")
+        daftarKartu.forEach { item ->
+            println(item)
+        }
+
+        tumpukkanKartuBuatNyangkul = TumpukkanKartu(daftarKartu)
+        tumpukkanKartuBuatNyangkul.kocok(tumpukkanKartuBuatNyangkul.getDaftarKartu().size * 2)
+        tumpukkanKartuBuatNyangkul.cetakDaftarKartu()
+
+        tumpukkanKartuYangSudahKebuang = TumpukkanKartu(mutableListOf())
+
+        daftarPemain.forEach { pemain ->
+            pemain.getTumpukkanKartu().tumpukLangsung(tumpukkanKartuBuatNyangkul.tarik(6))
+        }
+    }
 
     fun mulai() {
         val kartuPerdana = tumpukkanKartuBuatNyangkul.tarik(1)

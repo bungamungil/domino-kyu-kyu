@@ -1,28 +1,14 @@
 fun main() {
     // kartu domino, ada dua nominal mulai dari (0,0) sampai (6,6)
     // kartu (5,3) itu sama dengan (3,5)
-    val daftarKartu = generateKartuDomino();
-    println("Daftar Kartu")
-    daftarKartu.forEach { item ->
-        println(item)
-    }
-
-    val tumpukkanKartu = TumpukkanKartu(daftarKartu)
-    tumpukkanKartu.kocok(tumpukkanKartu.getDaftarKartu().size * 2)
-    tumpukkanKartu.cetakDaftarKartu()
 
     val daftarPemain = arrayListOf<Pemain>()
     for (p in 1 .. 3) {
-        val kartuPemain = tumpukkanKartu.tarik(6)
-        val pemain = Pemain("Pemain ${p}", TumpukkanKartu(kartuPemain.toMutableList()))
+        val pemain = Pemain("Pemain ${p}", TumpukkanKartu(mutableListOf()))
         daftarPemain.add(pemain)
     }
 
-    daftarPemain.forEach { pemain ->
-        println(pemain)
-    }
-
-    val game = GameDomino(daftarPemain, tumpukkanKartu, TumpukkanKartu(mutableListOf()))
+    val game = GameDomino(daftarPemain)
     game.mulai()
 }
 
