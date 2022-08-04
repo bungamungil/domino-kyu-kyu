@@ -18,9 +18,7 @@ class Pemain(
         val kartuYangBisaDimainkan = arrayListOf<KartuBisaDimainkan>()
         tumpukkanKartu.getDaftarKartu().forEachIndexed { index, kartuDominoPemain ->
             val kartuBisaDimainkan = tumpukkanKartuYangDimainkan.bisaDimainkan(kartuDominoPemain, index)
-            if (kartuBisaDimainkan != null) {
-                kartuYangBisaDimainkan.add(kartuBisaDimainkan)
-            }
+            kartuYangBisaDimainkan.addAll(kartuBisaDimainkan)
         }
         return kartuYangBisaDimainkan
     }

@@ -47,13 +47,21 @@ open class GameDomino(
                     if (tumpukkanKartuBuatNyangkul.getDaftarKartu().isNotEmpty()) {
                         val kartuYangDitarik = tumpukkanKartuBuatNyangkul.tarik(1)
                         pemain.getTumpukkanKartu().tumpukLangsung(kartuYangDitarik)
-                        userInterface.cetakKartuYangDicangkulPemain(pemain, kartuYangDitarik)
+                        userInterface.konfirmasiKartuYangDicangkulPemain(pemain, kartuYangDitarik)
                     } else {
                         return@forEach
                     }
                 }
+                if (apakahGameSudahSelesai()) {
+                    gameSelesai()
+                    return
+                }
             }
         } while (!apakahGameSudahSelesai())
+        gameSelesai()
+    }
+
+    fun gameSelesai() {
         val daftarPemenang = this.daftarPemain.sortedBy { pemain -> pemain.score() }
         userInterface.tampilkanDaftarPemenang(daftarPemenang)
     }

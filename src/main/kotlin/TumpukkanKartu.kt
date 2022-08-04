@@ -32,26 +32,27 @@ class TumpukkanKartu(
         this.daftarKartu.add(0, kartu)
     }
 
-    fun bisaDimainkan(melawan: KartuDomino, index: Int): KartuBisaDimainkan? {
+    fun bisaDimainkan(melawan: KartuDomino, index: Int): List<KartuBisaDimainkan> {
         val kartuDiDepan = this.daftarKartu.first()
         val kartuDiBelakang = this.daftarKartu.last()
+        val daftarKartuBisaDimainkan = arrayListOf<KartuBisaDimainkan>()
         if (kartuDiDepan.getNominal1() == melawan.getNominal1() ||
                 kartuDiDepan.getNominal1() == melawan.getNominal2()) {
             val lokasi = LokasiLangkahKartu.DiDepan
             val perluDiputar = kartuDiDepan.getNominal1() == melawan.getNominal1()
-            return KartuBisaDimainkan(
+            daftarKartuBisaDimainkan.add(KartuBisaDimainkan(
                 perluDiputar, index, melawan, lokasi
-            )
+            ))
         }
         if (kartuDiBelakang.getNominal2() == melawan.getNominal1() ||
             kartuDiBelakang.getNominal2() == melawan.getNominal2()) {
             val lokasi = LokasiLangkahKartu.DiBelakang
             val perluDiputar = kartuDiBelakang.getNominal2() == melawan.getNominal2()
-            return KartuBisaDimainkan(
+            daftarKartuBisaDimainkan.add(KartuBisaDimainkan(
                 perluDiputar, index, melawan, lokasi
-            )
+            ))
         }
-        return null
+        return daftarKartuBisaDimainkan
     }
 
     fun tumpukLangsung(daftarKartuTambahan: List<KartuDomino>) {

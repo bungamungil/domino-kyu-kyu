@@ -34,7 +34,8 @@ class CommandLineInterface : GameDominoUserInterface {
     }
 
     override fun cetakGiliranPemain(pemain: Pemain) {
-        println("Giliran ${pemain.getNama()}")
+        clearConsole()
+        println("\nGiliran ${pemain.getNama()}")
         println(pemain)
     }
 
@@ -50,11 +51,17 @@ class CommandLineInterface : GameDominoUserInterface {
         return kartuYangBisaDimainkan[kartuYangDipilih-1]
     }
 
-    override fun cetakKartuYangDicangkulPemain(pemain: Pemain, kartuYangDitarik: List<KartuDomino>) {
+    override fun konfirmasiKartuYangDicangkulPemain(pemain: Pemain, kartuYangDitarik: List<KartuDomino>) {
         println("${pemain.getNama()} menarik kartu dari cangkulan : ${kartuYangDitarik.first()}")
+        print("Lanjutkan? ")
+        generateScanner().nextLine()
     }
 
     override fun tampilkanDaftarPemenang(daftarPemenang: List<Pemain>) {
+        println("======================================")
+        println("PERMAINAN BERAKHIR ! ! ! SELAMAT KEPADA PEMENANG :")
+        println(daftarPemenang.first().getNama())
+        println("======================================")
         daftarPemenang.forEach { pemain ->
             println("${pemain.getNama()} : ${pemain.score()}")
         }
@@ -62,6 +69,19 @@ class CommandLineInterface : GameDominoUserInterface {
 
     override fun cetakDaftarKartuBuatNyangkul(daftarKartu: List<KartuDomino>) {
         println("Jumlah kartu yang masih tersedia untuk dicangkul : ${daftarKartu.size}")
+    }
+
+    private fun clearConsole() {
+        try {
+            val os = System.getProperty("os.name")
+            if (os.contains("Windows")) {
+                Runtime.getRuntime().exec(arrayOf("cls"))
+            } else {
+                Runtime.getRuntime().exec(arrayOf("clear"))
+            }
+        } catch (e: Exception) {
+            //  Handle any exceptions.
+        }
     }
 
 }

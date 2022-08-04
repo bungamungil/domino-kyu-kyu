@@ -10,7 +10,7 @@ interface GameDominoUserInterface {
 
     fun tanyaKartuYangAkanDimainkan(pemain: Pemain, kartuYangBisaDimainkan: List<KartuBisaDimainkan>) : KartuBisaDimainkan
 
-    fun cetakKartuYangDicangkulPemain(pemain: Pemain, kartuYangDitarik: List<KartuDomino>)
+    fun konfirmasiKartuYangDicangkulPemain(pemain: Pemain, kartuYangDitarik: List<KartuDomino>)
 
     fun tampilkanDaftarPemenang(daftarPemenang: List<Pemain>)
 
