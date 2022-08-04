@@ -1,9 +1,10 @@
 open class GameDomino(
-    val daftarPemain: List<Pemain>
+    val userInterface: GameDominoUserInterface
 ) {
 
     val tumpukkanKartuBuatNyangkul: TumpukkanKartu
     val tumpukkanKartuYangSudahKebuang: TumpukkanKartu
+    val daftarPemain: List<Pemain>
 
     init {
         val daftarKartu = generateKartuDomino();
@@ -18,6 +19,14 @@ open class GameDomino(
 
         tumpukkanKartuYangSudahKebuang = TumpukkanKartu(mutableListOf())
 
+        val jumlahPemain = userInterface.inputJumlahPemain()
+        daftarPemain = arrayListOf()
+        for (i in 1 .. jumlahPemain) {
+            daftarPemain.add(Pemain(
+                userInterface.inputNamaPemain(i),
+                TumpukkanKartu(mutableListOf())
+            ))
+        }
         daftarPemain.forEach { pemain ->
             pemain.getTumpukkanKartu().tumpukLangsung(tumpukkanKartuBuatNyangkul.tarik(6))
         }

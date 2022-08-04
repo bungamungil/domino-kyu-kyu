@@ -1,6 +1,6 @@
 import java.util.*
 
-class CommandLineInterface {
+class CommandLineInterface : GameDominoUserInterface {
 
     private fun generateScanner(): Scanner {
         return Scanner(System.`in`)
@@ -8,15 +8,7 @@ class CommandLineInterface {
 
     fun mulai() {
         cetakUcapanSelamatDatang()
-        val jumlahPemain = jumlahPemain()
-        val daftarPemain = arrayListOf<Pemain>()
-        for (i in 1 .. jumlahPemain) {
-            daftarPemain.add(Pemain(
-                tanyaNamaPemain(i),
-                TumpukkanKartu(mutableListOf())
-            ))
-        }
-        val game = GameDomino(daftarPemain)
+        val game = GameDomino(this)
         game.mulai()
     }
 
@@ -24,12 +16,12 @@ class CommandLineInterface {
         println("Selamat datang di DOMINO KYU KYU! GAME DOMINO TANPA DUIT~! BUKAN JUDI!! LEGAL DI PSE!!")
     }
 
-    fun jumlahPemain(): Int {
+    override fun inputJumlahPemain(): Int {
         print("Masukkan jumlah pemain : ")
         return generateScanner().nextInt()
     }
 
-    fun tanyaNamaPemain(pemainKe: Int): String {
+    override fun inputNamaPemain(pemainKe: Int): String {
         print("Masukkan nama pemain ke-$pemainKe : ")
         return generateScanner().nextLine()
     }
