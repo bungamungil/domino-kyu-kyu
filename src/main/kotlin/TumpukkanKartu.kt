@@ -18,13 +18,6 @@ class TumpukkanKartu(
         return daftarKartu
     }
 
-    fun cetakDaftarKartu() {
-        println("Daftar Kartu Tersedia di Tumpukkan Kartu : ")
-        daftarKartu.forEach { kartuDomino ->
-            println(kartuDomino)
-        }
-    }
-
     fun tarik(jumlahKartu: Int): List<KartuDomino> {
         val kartuYangDitarik = daftarKartu.take(jumlahKartu)
         this.daftarKartu = daftarKartu.drop(jumlahKartu).toMutableList()

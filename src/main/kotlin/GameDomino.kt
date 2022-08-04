@@ -8,14 +8,9 @@ open class GameDomino(
 
     init {
         val daftarKartu = generateKartuDomino();
-        println("Daftar Kartu")
-        daftarKartu.forEach { item ->
-            println(item)
-        }
 
         tumpukkanKartuBuatNyangkul = TumpukkanKartu(daftarKartu)
         tumpukkanKartuBuatNyangkul.kocok(tumpukkanKartuBuatNyangkul.getDaftarKartu().size * 2)
-        tumpukkanKartuBuatNyangkul.cetakDaftarKartu()
 
         tumpukkanKartuYangSudahKebuang = TumpukkanKartu(mutableListOf())
 
@@ -37,25 +32,23 @@ open class GameDomino(
         tumpukkanKartuYangSudahKebuang.tumpukLangsung(kartuPerdana)
         do {
             this.daftarPemain.forEach { pemain ->
-                // Cetak daftar kartu yang sudah terbuang
-                println("==============\nKartu yang Sudah Terbuang : ")
-                tumpukkanKartuYangSudahKebuang.cetakDaftarKartu();
+                userInterface.cetakDaftarKartuTerbuang(tumpukkanKartuYangSudahKebuang.getDaftarKartu())
+                userInterface.cetakDaftarKartuBuatNyangkul(tumpukkanKartuBuatNyangkul.getDaftarKartu())
 
                 // Player's Turn
-                println("${pemain.getNama()} Jalan : ")
-                println(pemain)
+                userInterface.cetakGiliranPemain(pemain)
+
                 val kartuYangBisaDimainkan = pemain.getDaftarKartuYangBisaDimainkan(tumpukkanKartuYangSudahKebuang)
-                kartuYangBisaDimainkan.forEach { kartuBisaDimainkan ->
-                    println(kartuBisaDimainkan)
-                }
+                userInterface.cetakKartuYangBisaDimainkanPemain(pemain, kartuYangBisaDimainkan)
+
                 if (kartuYangBisaDimainkan.isNotEmpty()) {
-                    // Todo : Pemain bisa memilih kartu mana yang akan dimainkan .... (Interaksi console)
+                    // Todo : input user memilih kartu yang akan dimainkan
                     pemain.mainkanKartu(kartuYangBisaDimainkan.first(), tumpukkanKartuYangSudahKebuang)
                 } else {
                     if (tumpukkanKartuBuatNyangkul.getDaftarKartu().isNotEmpty()) {
                         val kartuYangDitarik = tumpukkanKartuBuatNyangkul.tarik(1)
                         pemain.getTumpukkanKartu().tumpukLangsung(kartuYangDitarik)
-                        println("${pemain.getNama()} menarik kartu dari cangkulan : ${kartuYangDitarik.first()}")
+                        userInterface.cetakKartuYangDicangkulPemain(pemain, kartuYangDitarik)
                     } else {
                         return@forEach
                     }
@@ -63,9 +56,7 @@ open class GameDomino(
             }
         } while (!apakahGameSudahSelesai())
         val daftarPemenang = this.daftarPemain.sortedBy { pemain -> pemain.score() }
-        daftarPemenang.forEach { pemain ->
-            println("${pemain.getNama()} : ${pemain.score()}")
-        }
+        userInterface.tampilkanDaftarPemenang(daftarPemenang)
     }
 
     fun apakahGameSudahSelesai(): Boolean {
