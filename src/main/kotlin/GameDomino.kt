@@ -39,11 +39,10 @@ open class GameDomino(
                 userInterface.cetakGiliranPemain(pemain)
 
                 val kartuYangBisaDimainkan = pemain.getDaftarKartuYangBisaDimainkan(tumpukkanKartuYangSudahKebuang)
-                userInterface.cetakKartuYangBisaDimainkanPemain(pemain, kartuYangBisaDimainkan)
 
                 if (kartuYangBisaDimainkan.isNotEmpty()) {
                     // Todo : input user memilih kartu yang akan dimainkan
-                    pemain.mainkanKartu(kartuYangBisaDimainkan.first(), tumpukkanKartuYangSudahKebuang)
+                    pemain.mainkanKartu(userInterface.tanyaKartuYangAkanDimainkan(pemain, kartuYangBisaDimainkan), tumpukkanKartuYangSudahKebuang)
                 } else {
                     if (tumpukkanKartuBuatNyangkul.getDaftarKartu().isNotEmpty()) {
                         val kartuYangDitarik = tumpukkanKartuBuatNyangkul.tarik(1)

@@ -38,10 +38,16 @@ class CommandLineInterface : GameDominoUserInterface {
         println(pemain)
     }
 
-    override fun cetakKartuYangBisaDimainkanPemain(pemain: Pemain, kartuYangBisaDimainkan: List<KartuBisaDimainkan>) {
-        kartuYangBisaDimainkan.forEach { kartu ->
-            println(kartu)
+    override fun tanyaKartuYangAkanDimainkan(pemain: Pemain, kartuYangBisaDimainkan: List<KartuBisaDimainkan>): KartuBisaDimainkan {
+        for (i in 1 .. kartuYangBisaDimainkan.size) {
+            println("$i. ${kartuYangBisaDimainkan[i-1]}")
         }
+        print("Pilih kartu yang mau ${pemain.getNama()} mainkan : ")
+        val kartuYangDipilih = generateScanner().nextInt()
+        if (kartuYangDipilih < 1 || kartuYangDipilih > kartuYangBisaDimainkan.size) {
+            return tanyaKartuYangAkanDimainkan(pemain, kartuYangBisaDimainkan)
+        }
+        return kartuYangBisaDimainkan[kartuYangDipilih-1]
     }
 
     override fun cetakKartuYangDicangkulPemain(pemain: Pemain, kartuYangDitarik: List<KartuDomino>) {

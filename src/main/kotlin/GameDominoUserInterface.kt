@@ -8,7 +8,7 @@ interface GameDominoUserInterface {
 
     fun cetakGiliranPemain(pemain: Pemain)
 
-    fun cetakKartuYangBisaDimainkanPemain(pemain: Pemain, kartuYangBisaDimainkan: List<KartuBisaDimainkan>)
+    fun tanyaKartuYangAkanDimainkan(pemain: Pemain, kartuYangBisaDimainkan: List<KartuBisaDimainkan>) : KartuBisaDimainkan
 
     fun cetakKartuYangDicangkulPemain(pemain: Pemain, kartuYangDitarik: List<KartuDomino>)
 
